@@ -16,9 +16,13 @@
 
 package com.stackmob.android.sdk.common;
 
+import android.content.Context;
+
 import com.stackmob.android.sdk.callback.*;
 import com.stackmob.sdk.callback.StackMobRedirectedCallback;
 import com.stackmob.sdk.api.StackMob;
+import com.stackmob.sdk.api.StackMobRequest;
+
 import java.util.Map;
 
 public class StackMobCommon {
@@ -45,6 +49,10 @@ public class StackMobCommon {
 			//do nothing for now
 		}
 	};
+	
+	public static void setUsePersistentCookies(Context c) {
+		StackMobRequest.setCookieStore(new StackMobAndroidCookieStore(c));
+	}
 	
 	public static StackMob getStackMobInstance() {
 		if(stackmob == null) {
