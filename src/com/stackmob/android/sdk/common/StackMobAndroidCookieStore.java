@@ -16,6 +16,8 @@
 
 package com.stackmob.android.sdk.common;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 import android.content.Context;
@@ -25,32 +27,38 @@ import com.stackmob.sdk.api.StackMobCookieStore;
 
 public class StackMobAndroidCookieStore extends StackMobCookieStore {
 	
+	private SharedPreferences prefs;
 	private SharedPreferences.Editor editor;
 	
 	public StackMobAndroidCookieStore(Context context) {
 		super();
-		SharedPreferences prefs = context.getSharedPreferences("stackmob." + StackMobCommon.API_KEY, 0);
+		prefs = context.getSharedPreferences("stackmob." + StackMobCommon.API_KEY, 0);
 		editor = prefs.edit();
-		Map<String,?> cookies = prefs.getAll();
-		for(String key : cookies.keySet()) {
-			addToCookieMap((String)cookies.get(key));
-		}
 	}
 	
 	@Override
     protected void storeCookie(String cookieString) {
-		super.storeCookie(cookieString);
 		if(cookieString != null) {
 			String key = cookieString.split("=")[0];
 			editor.putString(key, cookieString);
-			editor.apply();
+			editor.commit();
 		}
+	}
+	
+	@Override
+	public String cookieHeader() {
+		Map<String,?> rawCookies = prefs.getAll();
+		Map<String, Map.Entry<String, Date>> cookies = new HashMap<String, Map.Entry<String, Date>>();
+		for(String key : rawCookies.keySet()) {
+			addToCookieMap(cookies, (String)rawCookies.get(key));
+		}
+		return cookieMapToHeaderString(cookies);
 	}
 	
 	@Override
     public void clear() {
 		super.clear();
 		editor.clear();
-		editor.apply();
+		editor.commit();
 	}
 }

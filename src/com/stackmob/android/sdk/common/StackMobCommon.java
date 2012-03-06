@@ -41,8 +41,8 @@ public class StackMobCommon {
 	
 	public static StackMobTwitterCallback TwitterCallback = null;
 	public static StackMobFacebookCallback FacebookCallback = null;
-	 
-	private static StackMob stackmob;
+
+	private static boolean initialized = false;
 	
 	private static StackMobRedirectedCallback redirectedCallback = new StackMobRedirectedCallback() {
 		@Override public void redirected(String originalURL, Map<String, String> redirectHeaders, String redirectBody, String newURL) {
@@ -50,14 +50,14 @@ public class StackMobCommon {
 		}
 	};
 	
-	public static void setUsePersistentCookies(Context c) {
+	public static void init(Context c) {
+		StackMob.setStackMob(new StackMob(API_KEY, API_SECRET, USER_OBJECT_NAME, API_VERSION, API_URL_FORMAT, PUSH_API_URL_FORMAT, redirectedCallback));
 		StackMobRequest.setCookieStore(new StackMobAndroidCookieStore(c));
+		initialized = true;
 	}
-	
+
 	public static StackMob getStackMobInstance() {
-		if(stackmob == null) {
-			stackmob = new StackMob(API_KEY, API_SECRET, USER_OBJECT_NAME, API_VERSION, API_URL_FORMAT, PUSH_API_URL_FORMAT, redirectedCallback);
-		}
-		return stackmob;
+		if(!initialized) throw new IllegalStateException("Make sure to call StackMobCommon.init(Contect c) in onCreate");
+		return StackMob.getStackMob();
 	}
 }
