@@ -9,5 +9,6 @@
 	<classpathentry kind="lib" path="assets/signpost-commonshttp4-1.2.1.1.jar"/>
 	<classpathentry kind="lib" path="assets/signpost-core-1.2.1.1.jar"/>
 	<classpathentry kind="lib" path="assets/stackmob-java-client-sdk-0.3.4.jar"/>
+	<classpathentry kind="lib" path="assets/inneractiveAdSDK.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
