@@ -57,6 +57,7 @@ public class StackMobCommon {
 	public static void init(Context c) {
 		StackMob.setStackMob(new StackMob(OAUTH_VERSION, API_KEY, API_SECRET, USER_OBJECT_NAME, API_VERSION, API_URL_FORMAT, PUSH_API_URL_FORMAT, redirectedCallback));
 		StackMob.getStackMob().setSession(new StackMobAndroidSession(c, StackMob.getStackMob().getSession()));
+		StackMob.getStackMob().getSession().setOAuthVersion(OAUTH_VERSION); //The copy ctor needs to be fixed
 		StackMob.setUserAgentName("Android");
 		StackMob.setLogger(new StackMobAndroidLogger());
 		StackMob.getLogger().setLogging(LOGGING_ENABLED);
