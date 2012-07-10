@@ -22,10 +22,12 @@ import com.stackmob.android.sdk.callback.*;
 import com.stackmob.sdk.callback.StackMobRedirectedCallback;
 import com.stackmob.sdk.api.StackMob;
 import com.stackmob.sdk.api.StackMobRequest;
+import com.stackmob.sdk.api.StackMob.OAuthVersion;
 
 import java.util.Map;
 
 public class StackMobCommon {
+	public static OAuthVersion OAUTH_VERSION = OAuthVersion.One;
 	public static String API_KEY = "YOUR_API_KEY_HERE";
 	public static String API_SECRET = "YOUR_API_SECRET_HERE";
 	public static String USER_OBJECT_NAME = "YOUR_USER_OBJECT_NAME_HERE";
@@ -53,7 +55,7 @@ public class StackMobCommon {
 	};
 	
 	public static void init(Context c) {
-		StackMob.setStackMob(new StackMob(API_KEY, API_SECRET, USER_OBJECT_NAME, API_VERSION, API_URL_FORMAT, PUSH_API_URL_FORMAT, redirectedCallback));
+		StackMob.setStackMob(new StackMob(OAUTH_VERSION, API_KEY, API_SECRET, USER_OBJECT_NAME, API_VERSION, API_URL_FORMAT, PUSH_API_URL_FORMAT, redirectedCallback));
 		StackMob.getStackMob().setSession(new StackMobAndroidSession(c, StackMob.getStackMob().getSession()));
 		StackMob.setUserAgentName("Android");
 		StackMob.setLogger(new StackMobAndroidLogger());
