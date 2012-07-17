@@ -12,6 +12,7 @@ public class StackMobAndroidSession extends StackMobSession {
 	private static final String SERVER_TIME_KEY = "servertimediff";
 	private static final String ACCESS_TOKEN_KEY = "accesstoken";
 	private static final String ACCESS_TOKEN_EXPIRATION_KEY = "accesstokenexpiration";
+	private static final String REFRESH_TOKEN_KEY = "refreshtoken";
 	private static final String MAC_KEY_KEY = "mackey";
 	private SharedPreferences.Editor serverTimeDiffEditor;
 	private SharedPreferences.Editor oauth2Editor;
@@ -27,8 +28,9 @@ public class StackMobAndroidSession extends StackMobSession {
 		oauth2Editor = oauth2Prefs.edit();
 		String accessToken = oauth2Prefs.getString(ACCESS_TOKEN_KEY, null);
 		String macKey = oauth2Prefs.getString(MAC_KEY_KEY, null);
+		String refreshToken = oauth2Prefs.getString(REFRESH_TOKEN_KEY, null);
 		long oauth2ExpiryTime = oauth2Prefs.getLong(ACCESS_TOKEN_EXPIRATION_KEY, -1);
-		super.setOAuth2TokenAndExpiration(accessToken, macKey, oauth2ExpiryTime == -1 ? null : new Date(oauth2ExpiryTime));
+		super.setOAuth2TokensAndExpiration(accessToken, macKey, refreshToken, oauth2ExpiryTime == -1 ? null : new Date(oauth2ExpiryTime));
 	}
 	
 	@Override
@@ -42,10 +44,11 @@ public class StackMobAndroidSession extends StackMobSession {
 		}
     }
 	@Override
-    public void setOAuth2TokenAndExpiration(String accessToken, String macKey, int seconds) {
-        super.setOAuth2TokenAndExpiration(accessToken, macKey, seconds);
+    public void setOAuth2TokensAndExpiration(String accessToken, String macKey, String refreshToken, Date expiry) {
+        super.setOAuth2TokensAndExpiration(accessToken, macKey, refreshToken, expiry);
         oauth2Editor.putString(ACCESS_TOKEN_KEY, accessToken);
         oauth2Editor.putString(MAC_KEY_KEY, macKey);
-        oauth2Editor.putLong(ACCESS_TOKEN_EXPIRATION_KEY, super.getOAuth2TokenExpiration().getTime());
+        oauth2Editor.putString(REFRESH_TOKEN_KEY, refreshToken);
+        oauth2Editor.putLong(ACCESS_TOKEN_EXPIRATION_KEY, expiry.getTime());
     }
 }
