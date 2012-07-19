@@ -64,6 +64,11 @@ public class StackMobCommon {
 		init(c, OAuthVersion.Two, publicKey, "", USER_OBJECT_NAME, apiVersion, API_URL_FORMAT, PUSH_API_URL_FORMAT);
 	}
 	
+	// Init with minimal information for oauth1 and the most basic defaults
+	public static void init(Context c, String publicKey, String privateKey, int apiVersion) {
+		init(c, OAuthVersion.Two, publicKey, "", USER_OBJECT_NAME, apiVersion, API_URL_FORMAT, PUSH_API_URL_FORMAT);
+	}
+	
 	// Init specifying all options
 	public static void init(Context c, OAuthVersion version, String publicKey, String privateKey, String userObjectName, int apiVersion, String apiUrlFormat, String pushUrlFormat) {
 		StackMob.setStackMob(new StackMob(version, publicKey, privateKey, userObjectName, apiVersion, apiUrlFormat, pushUrlFormat, redirectedCallback));
