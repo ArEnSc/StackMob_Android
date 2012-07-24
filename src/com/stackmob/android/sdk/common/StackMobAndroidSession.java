@@ -24,7 +24,7 @@ public class StackMobAndroidSession extends StackMobSession {
 		SharedPreferences serverTimeDiffPrefs = context.getSharedPreferences("stackmob.servertimediff", Context.MODE_PRIVATE);
 		serverTimeDiffEditor = serverTimeDiffPrefs.edit();
 		super.saveServerTimeDiff(serverTimeDiffPrefs.getLong(SERVER_TIME_KEY, 0));
-		SharedPreferences oauth2Prefs = context.getSharedPreferences(StackMobCommon.API_KEY + ".oauth2", Context.MODE_PRIVATE);
+		SharedPreferences oauth2Prefs = context.getSharedPreferences(session.getKey() + ".oauth2", Context.MODE_PRIVATE);
 		oauth2Editor = oauth2Prefs.edit();
 		String accessToken = oauth2Prefs.getString(ACCESS_TOKEN_KEY, null);
 		String macKey = oauth2Prefs.getString(MAC_KEY_KEY, null);
@@ -50,5 +50,6 @@ public class StackMobAndroidSession extends StackMobSession {
         oauth2Editor.putString(MAC_KEY_KEY, macKey);
         oauth2Editor.putString(REFRESH_TOKEN_KEY, refreshToken);
         oauth2Editor.putLong(ACCESS_TOKEN_EXPIRATION_KEY, expiry.getTime());
+        oauth2Editor.commit();
     }
 }
