@@ -21,28 +21,16 @@ import android.content.Context;
 import com.stackmob.android.sdk.callback.*;
 import com.stackmob.sdk.callback.StackMobRedirectedCallback;
 import com.stackmob.sdk.api.StackMob;
-import com.stackmob.sdk.api.StackMobRequest;
 import com.stackmob.sdk.api.StackMob.OAuthVersion;
 
 import java.util.Map;
 
 public class StackMobCommon {
-	public static OAuthVersion OAUTH_VERSION = OAuthVersion.One;
-	public static String API_KEY = "YOUR_API_KEY_HERE";
-	public static String API_SECRET = "YOUR_API_SECRET_HERE";
-	public static String USER_OBJECT_NAME = "user";
-	public static Integer API_VERSION = 0;
-	
-	public static String API_URL_FORMAT = "api.mob1.stackmob.com";
-	public static String PUSH_API_URL_FORMAT = "push.mob1.stackmob.com";
-	
 	public static String TWITTER_CONSUMER_KEY = "YOUR_TWITTER_CONSUMER_KEY_HERE";
 	public static String TWITTER_CONSUMER_SECRET = "YOUR_TWITTER_CONSUMER_SECRET_HERE";
 	
 	public static String FACEBOOK_APP_ID = "YOUR_FACEBOOK_APP_ID_HERE";
-	
-	public static boolean LOGGING_ENABLED = false;
-	
+
 	public static StackMobTwitterCallback TwitterCallback = null;
 	public static StackMobFacebookCallback FacebookCallback = null;
 
@@ -54,29 +42,26 @@ public class StackMobCommon {
 		}
 	};
 	
-	// Init using the constants above
-	public static void init(Context c) {
-		init(c, OAUTH_VERSION, API_KEY, API_SECRET, USER_OBJECT_NAME, API_VERSION, API_URL_FORMAT, PUSH_API_URL_FORMAT);
-	}
-	
 	// Init with minimal information and the most basic defaults
-	public static void init(Context c, String publicKey, int apiVersion) {
-		init(c, OAuthVersion.Two, publicKey, "", USER_OBJECT_NAME, apiVersion, API_URL_FORMAT, PUSH_API_URL_FORMAT);
+	public static void init(Context c, int apiVersionNumber, String apiKey) {
+		new StackMob(apiVersionNumber, apiKey);
+		setAndroidSession(c);
 	}
 	
 	// Init with minimal information for oauth1 and the most basic defaults
-	public static void init(Context c, String publicKey, String privateKey, int apiVersion) {
-		init(c, OAuthVersion.Two, publicKey, privateKey, USER_OBJECT_NAME, apiVersion, API_URL_FORMAT, PUSH_API_URL_FORMAT);
+	public static void init(Context c, OAuthVersion oauthVersion, int apiVersionNumber, String apiKey, String apiSecret) {
+		new StackMob(oauthVersion, apiVersionNumber, apiKey, apiSecret);
+		setAndroidSession(c);
 	}
 	
 	// Init specifying all options
-	public static void init(Context c, OAuthVersion version, String publicKey, String privateKey, String userObjectName, int apiVersion, String apiUrlFormat, String pushUrlFormat) {
-		StackMob.setStackMob(new StackMob(version, publicKey, privateKey, userObjectName, apiVersion, apiUrlFormat, pushUrlFormat, redirectedCallback));
-		StackMob.getStackMob().setSession(new StackMobAndroidSession(c, StackMob.getStackMob().getSession()));
-		StackMob.setUserAgentName("Android");
-		StackMob.setLogger(new StackMobAndroidLogger());
-		StackMob.getLogger().setLogging(LOGGING_ENABLED);
-		StackMobRequest.setCookieStore(new StackMobAndroidCookieStore(c));
+	public static void init(Context c, OAuthVersion oauthVersion, int apiVersionNumber, String apiKey, String apiSecret, String apiHost, String pushHost, String userSchema, String userIdName, String passwordFieldName, StackMobRedirectedCallback redirectedCallback) {
+		new StackMob(oauthVersion, apiVersionNumber, apiKey, apiSecret, apiHost, pushHost, userSchema, userIdName, passwordFieldName, redirectedCallback);
+		setAndroidSession(c);
+	}
+	
+	private static void setAndroidSession(Context c) {
+		StackMob.getStackMob().setSession(new StackMobAndroidSession(c, StackMob.getStackMob().getSession()));	
 		initialized = true;
 	}
 
