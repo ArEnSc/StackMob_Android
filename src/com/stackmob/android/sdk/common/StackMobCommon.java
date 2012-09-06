@@ -23,8 +23,6 @@ import com.stackmob.sdk.callback.StackMobRedirectedCallback;
 import com.stackmob.sdk.api.StackMob;
 import com.stackmob.sdk.api.StackMob.OAuthVersion;
 
-import java.util.Map;
-
 public class StackMobCommon {
 	public static String TWITTER_CONSUMER_KEY = "YOUR_TWITTER_CONSUMER_KEY_HERE";
 	public static String TWITTER_CONSUMER_SECRET = "YOUR_TWITTER_CONSUMER_SECRET_HERE";
@@ -34,14 +32,6 @@ public class StackMobCommon {
 	public static StackMobTwitterCallback TwitterCallback = null;
 	public static StackMobFacebookCallback FacebookCallback = null;
 
-	private static boolean initialized = false;
-	
-	private static StackMobRedirectedCallback redirectedCallback = new StackMobRedirectedCallback() {
-		@Override public void redirected(String originalURL, Map<String, String> redirectHeaders, String redirectBody, String newURL) {
-			//do nothing for now
-		}
-	};
-	
 	// Init with minimal information and the most basic defaults
 	public static void init(Context c, int apiVersionNumber, String apiKey) {
 		new StackMob(apiVersionNumber, apiKey);
@@ -62,11 +52,5 @@ public class StackMobCommon {
 	
 	private static void setAndroidSession(Context c) {
 		StackMob.getStackMob().setSession(new StackMobAndroidSession(c, StackMob.getStackMob().getSession()));	
-		initialized = true;
-	}
-
-	public static StackMob getStackMobInstance() {
-		if(!initialized) throw new IllegalStateException("Make sure to call StackMobCommon.init(Contect c) in onCreate");
-		return StackMob.getStackMob();
 	}
 }
