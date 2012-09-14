@@ -26,12 +26,12 @@ import android.content.SharedPreferences;
 import com.stackmob.sdk.api.StackMob;
 import com.stackmob.sdk.util.StackMobCookieManager;
 
-public class StackMobAndroidCookieStore extends StackMobCookieManager {
+public class StackMobAndroidCookieManager extends StackMobCookieManager {
 	
 	private SharedPreferences prefs;
 	private SharedPreferences.Editor editor;
 	
-	public StackMobAndroidCookieStore(Context context) {
+	public StackMobAndroidCookieManager(Context context) {
 		super();
 		prefs = context.getSharedPreferences("stackmob." + StackMob.getStackMob().getSession().getKey(), 0);
 		editor = prefs.edit();

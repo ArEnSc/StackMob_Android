@@ -17,7 +17,7 @@
 package com.stackmob.android.sdk.activity;
 
 import com.stackmob.sdk.exception.StackMobException;
-import static com.stackmob.android.sdk.common.StackMobCommon.*;
+import static com.stackmob.android.sdk.common.StackMobAndroid.*;
 
 import oauth.signpost.OAuth;
 import oauth.signpost.commonshttp.CommonsHttpOAuthConsumer;

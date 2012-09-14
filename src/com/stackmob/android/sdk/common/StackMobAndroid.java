@@ -20,10 +20,11 @@ import android.content.Context;
 
 import com.stackmob.android.sdk.callback.*;
 import com.stackmob.sdk.callback.StackMobRedirectedCallback;
+import com.stackmob.sdk.push.StackMobPush;
 import com.stackmob.sdk.api.StackMob;
 import com.stackmob.sdk.api.StackMob.OAuthVersion;
 
-public class StackMobCommon {
+public class StackMobAndroid {
 	public static String TWITTER_CONSUMER_KEY = "YOUR_TWITTER_CONSUMER_KEY_HERE";
 	public static String TWITTER_CONSUMER_SECRET = "YOUR_TWITTER_CONSUMER_SECRET_HERE";
 	
@@ -42,12 +43,15 @@ public class StackMobCommon {
 	public static void init(Context c, OAuthVersion oauthVersion, int apiVersionNumber, String apiKey, String apiSecret) {
 		new StackMob(oauthVersion, apiVersionNumber, apiKey, apiSecret);
 		setAndroidSession(c);
+		new StackMobPush(StackMob.getStackMob());
+
 	}
 	
 	// Init specifying all options
 	public static void init(Context c, OAuthVersion oauthVersion, int apiVersionNumber, String apiKey, String apiSecret, String apiHost, String pushHost, String userSchema, String userIdName, String passwordFieldName, StackMobRedirectedCallback redirectedCallback) {
-		new StackMob(oauthVersion, apiVersionNumber, apiKey, apiSecret, apiHost, pushHost, userSchema, userIdName, passwordFieldName, redirectedCallback);
+		new StackMob(oauthVersion, apiVersionNumber, apiKey, apiSecret, apiHost, userSchema, userIdName, passwordFieldName, redirectedCallback);
 		setAndroidSession(c);
+		new StackMobPush(StackMob.getStackMob());
 	}
 	
 	private static void setAndroidSession(Context c) {

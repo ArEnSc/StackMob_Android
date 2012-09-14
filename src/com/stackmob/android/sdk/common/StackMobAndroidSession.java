@@ -23,7 +23,7 @@ public class StackMobAndroidSession extends StackMobSession {
 		super(session);
 		userAgentName = "Android";
 		setLogger(new StackMobAndroidLogger());
-		setCookieManager(new StackMobAndroidCookieStore(context));
+		setCookieManager(new StackMobAndroidCookieManager(context));
 		SharedPreferences serverTimeDiffPrefs = context.getSharedPreferences("stackmob.servertimediff", Context.MODE_PRIVATE);
 		serverTimeDiffEditor = serverTimeDiffPrefs.edit();
 		super.saveServerTimeDiff(serverTimeDiffPrefs.getLong(SERVER_TIME_KEY, 0));

@@ -22,7 +22,7 @@ import com.facebook.android.Facebook.DialogListener;
 import com.facebook.android.FacebookError;
 import com.stackmob.sdk.exception.StackMobException;
 
-import static com.stackmob.android.sdk.common.StackMobCommon.*;
+import static com.stackmob.android.sdk.common.StackMobAndroid.*;
 
 import android.app.Activity;
 import android.content.Intent;
