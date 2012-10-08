@@ -14,6 +14,7 @@ public class StackMobAndroidSession extends StackMobSession {
 	private static final String ACCESS_TOKEN_EXPIRATION_KEY = "accesstokenexpiration";
 	private static final String REFRESH_TOKEN_KEY = "refreshtoken";
 	private static final String MAC_KEY_KEY = "mackey";
+	private static final String USER_KEY = "user";
 	private SharedPreferences.Editor serverTimeDiffEditor;
 	private SharedPreferences.Editor oauth2Editor;
 	private Date nextSaveTime = new Date();
@@ -34,6 +35,8 @@ public class StackMobAndroidSession extends StackMobSession {
 		String refreshToken = oauth2Prefs.getString(REFRESH_TOKEN_KEY, null);
 		long oauth2ExpiryTime = oauth2Prefs.getLong(ACCESS_TOKEN_EXPIRATION_KEY, -1);
 		super.setOAuth2TokensAndExpiration(accessToken, macKey, refreshToken, oauth2ExpiryTime == -1 ? null : new Date(oauth2ExpiryTime));
+		String loggedInUser = oauth2Prefs.getString(USER_KEY, null);
+		if(loggedInUser != null) super.setLastUserLoginName(loggedInUser);
 	}
 	
 	@Override
@@ -55,4 +58,11 @@ public class StackMobAndroidSession extends StackMobSession {
         oauth2Editor.putLong(ACCESS_TOKEN_EXPIRATION_KEY, expiry.getTime());
         oauth2Editor.commit();
     }
+	
+	@Override
+	public void setLastUserLoginName(String name) {
+		super.setLastUserLoginName(name);
+		oauth2Editor.putString(USER_KEY, name);
+		oauth2Editor.commit();
+	}
 }
