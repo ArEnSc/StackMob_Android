@@ -18,20 +18,12 @@ package com.stackmob.android.sdk.common;
 
 import android.content.Context;
 
-import com.stackmob.android.sdk.callback.*;
 import com.stackmob.sdk.callback.StackMobRedirectedCallback;
 import com.stackmob.sdk.push.StackMobPush;
 import com.stackmob.sdk.api.StackMob;
 import com.stackmob.sdk.api.StackMob.OAuthVersion;
 
 public class StackMobAndroid {
-	public static String TWITTER_CONSUMER_KEY = "YOUR_TWITTER_CONSUMER_KEY_HERE";
-	public static String TWITTER_CONSUMER_SECRET = "YOUR_TWITTER_CONSUMER_SECRET_HERE";
-	
-	public static String FACEBOOK_APP_ID = "YOUR_FACEBOOK_APP_ID_HERE";
-
-	public static StackMobTwitterCallback TwitterCallback = null;
-	public static StackMobFacebookCallback FacebookCallback = null;
 
 	// Init with minimal information and the most basic defaults
 	public static void init(Context c, int apiVersionNumber, String apiKey) {

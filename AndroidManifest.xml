@@ -28,6 +28,8 @@
 
 		<activity android:name=".activity.FacebookActivity"
 			android:configChanges="keyboardHidden|orientation"/>
+		
+		<activity android:name="com.gigya.socialize.android.GSWebViewActivity" />
 
 	</application>
 
