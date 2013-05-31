@@ -1,4 +1,4 @@
-# Stackmob Android SDK
+# StackMob Android SDK
 The StackMob Android SDK provides access to your StackMob API from Android devices. It builds on top of the [StackMob Java Client SDK](https://www.stackmob.com/platform/stackmob/help/topics/Getting-Started:-Java-Client-SDK).
 
 For information on setting up the SDK visit the [Getting Started Page](https://developer.stackmob.com/start).
@@ -15,7 +15,7 @@ If you'd like to contribute code, fork this repository, make your changes and su
 
 # Copyright
 
-Copyright 2011 StackMob
+Copyright 2012 StackMob
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
