@@ -15,7 +15,7 @@ If you'd like to contribute code, fork this repository, make your changes and su
 
 # Copyright
 
-Copyright 2012 StackMob
+Copyright 2011-2013 StackMob
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
