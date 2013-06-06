@@ -10,3 +10,4 @@ tmp
 StackMobAndroid/build/*
 .idea/*
 *.iml
+.gradle/*
