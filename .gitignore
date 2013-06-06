@@ -6,9 +6,7 @@ bin
 gen
 target
 project.properties
-
 tmp
-*.iws
-*.ipr
+StackMobAndroid/build/*
+.idea/*
 *.iml
-.idea
