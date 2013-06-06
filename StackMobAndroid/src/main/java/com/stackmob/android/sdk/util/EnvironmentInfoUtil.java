@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package sdk.com.stackmob.android.sdk.util;
+package com.stackmob.android.sdk.util;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;
