@@ -6,11 +6,16 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:0.4'
         classpath 'com.github.townsfolk:gradle-release:1.2'
+        classpath('com.github.rholder:gradle-one-jar:1.0.3')
     }
 }
+
 apply plugin: 'android-library'
 apply plugin: 'release'
-
+//need this in order to take all deps and deep copy them into this jar, so developers don't need to add dependencies on their own.
+//this requires the java plugin, which is incompatible with the stock android plugin.
+//so, maybe figure out how to use http://docs.codehaus.org/display/GRADLE/Plugins#Plugins-AndroidPlugin, so I can use this too.
+//apply plugin: 'gradle-one-jar'
 
 dependencies {
     repositories {
