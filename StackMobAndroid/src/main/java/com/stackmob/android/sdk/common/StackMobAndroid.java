@@ -36,7 +36,6 @@ public class StackMobAndroid {
         new StackMob(oauthVersion, apiVersionNumber, apiKey, apiSecret);
         setAndroidSession(c);
         new StackMobPush(StackMob.getStackMob());
-
     }
 
     // Init specifying all options
