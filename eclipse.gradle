@@ -20,11 +20,17 @@ dependencies {
 	compile files('libs/inneractiveAdSDK-v3.1.9-S.jar')
 }
 
-jar {
-	dependsOn configurations.runtime
-	into('./bin') {
-		from { configurations.runtime.collect { it.isDirectory() ? it : zipTree(it) } }
-		archiveName 'stackmob_android.jar'	
+task('copyFatJar', type: Copy) {
+	from('build/libs') {
+		include 'stackmob_android.jar'
 	}
+	into 'bin'
 }
 
+task('fatjar', type: Jar) {
+	println "creating fat jar"
+	dependsOn configurations.runtime
+	from { configurations.runtime.collect { it.isDirectory() ? it : zipTree(it) } }
+	archiveName 'stackmob_android.jar'
+	copyFatJar
+}
