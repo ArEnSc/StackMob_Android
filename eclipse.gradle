@@ -1,0 +1,30 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:0.4'
+    }
+}
+apply plugin: 'java'
+
+dependencies {
+	repositories {
+		mavenCentral()
+	}
+	compile group:'org.scribe',name:'scribe',version:'1.3.2'
+  compile group:'oauth.signpost',name:'signpost-commonshttp4',version:'1.2.1.1' exclude module: 'httpclient'
+  compile group:'oauth.signpost',name:'signpost-core',version:'1.2.1.1'
+  compile group:'com.google.code.gson',name:'gson',version:'2.1'
+  compile group:'com.stackmob',name:'stackmob-java-client-sdk',version:'1.3.0'
+	compile files('libs/inneractiveAdSDK-v3.1.9-S.jar')
+}
+
+jar {
+	dependsOn configurations.runtime
+	into('./bin') {
+		from { configurations.runtime.collect { it.isDirectory() ? it : zipTree(it) } }
+		archiveName 'stackmob_android.jar'	
+	}
+}
+

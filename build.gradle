@@ -17,6 +17,20 @@ dependencies {
     compile files('../../../../android-sdk/assets/inneractiveAdSDK-v3.1.9-S.jar')
 }
 
+configurations {
+	//custom config to deep copy jars for eclipse integration
+	eclipseDeepCopyJars
+}
+
+task prepare_eclipse {
+	dependencies {
+		eclipseDeepCopyJars fileTree(dir: 'libs', include: '*.jar')
+	}
+	doLast {
+		println "hello world"
+	}
+}
+
 android {
     compileSdkVersion 8
     buildToolsVersion "8"
