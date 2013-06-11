@@ -15,22 +15,6 @@
 
 	<application android:icon="@drawable/icon" android:label="stackmob-sdk">
 
-		<activity android:name=".activity.TwitterActivity"
-			android:launchMode="singleTask"
-			android:configChanges="keyboardHidden|orientation">
-			<intent-filter>
-				<action android:name="android.intent.action.VIEW" />
-				<category android:name="android.intent.category.DEFAULT" />
-				<category android:name="android.intent.category.BROWSABLE" />
-				<data android:scheme="x-oauthflow-twitter" android:host="callback" />
-			</intent-filter>
-		</activity>
-
-		<activity android:name=".activity.FacebookActivity"
-			android:configChanges="keyboardHidden|orientation"/>
-		
-		<activity android:name="com.gigya.socialize.android.GSWebViewActivity" />
-
 	</application>
 
 	<uses-permission android:name="android.permission.INTERNET" />
